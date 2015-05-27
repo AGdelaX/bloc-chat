@@ -1,0 +1,1 @@
+blocChat = angular.module('BlocChat', ['ui.router', 'firebase']);

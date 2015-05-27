@@ -1,0 +1,32 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+.navbar {
+	float: left;
+	width: 400px;
+	background-color: LightGray;
+	height: 100%;
+}
+
+.navbar h1, ul {
+	font-family: sans-serif; 
+}
+
+.navbar ul {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+	line-height: 2em;
+}
+
+
+.navmenu {
+	margin: 30px;
+}
