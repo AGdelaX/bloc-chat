@@ -1,0 +1,13 @@
+<div ng-controller="modalWindow">
+	<div id="modal-description">
+		<h1>Create new room</h1>
+		<h3>Enter a room name</h3>
+	</div>
+
+	<!-- Might make this a directive -->
+	<input type="text" id="modal-input" ng-model="form.text"/>
+	<!-- -->
+
+	<button class="btn btn-primary" ng-click="input()">OK</button>
+	<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
