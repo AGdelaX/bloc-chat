@@ -73,6 +73,11 @@ module.exports = function(grunt) {
                     src: [ './**/*.html' ],
                     dest: './dist/templates',
                     cwd: './app/templates'
+                }, {
+                    expand: true,
+                    src: [ './**/*' ],
+                    dest: './dist/vendor',
+                    cwd: './bower_components'
                 }]
             }
         },
