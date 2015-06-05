@@ -15,25 +15,37 @@
 
 </head>
 
-<body>
+<body ng-controller="RoomsDisplay">
 
-	<div ng-controller="modalWindow" class= "navbar">
+	<div class= "navbar">
 		<nav>
 			<div class="navmenu">
 
-				<div class="row">
+				<div class="row" ng-controller="modalWindow">
 					<h1>Bloc Chat</h1>
 					<button class="btn" ng-click="open()">New Room</button>
 				</div>
 
-				<div ng-controller="RoomsDisplay">
+				<div>
 					<ul class= "available-rooms">
-						<li ng-repeat="room in rooms"><a href="#">{{ room.name }}</a></li>
+						<li ng-repeat="room in rooms"><a href="#" ng-click="roomClick()">{{ room.name }}</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</div>
+
+	<div class="chatroom">
+		<h1>{{ chat.room }}</h1>
+		<div class="chatlog">
+			<div class="textbox" ng-repeat="chats in roomMessage">
+				<h3 class="username">{{ chats.username }}</h3>
+				<p class="message">{{ chats.message }}</p>
+				<p class="time">{{ chats.time }}</p>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
 

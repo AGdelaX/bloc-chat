@@ -1,10 +1,18 @@
 "use strict";
 
+var userChat = {
+	room: "",
+	username : "Joe Lipper",
+	time : "1:45",
+	message: "Hey, how's it going?"
+};
+
 var blocChat = angular.module('BlocChat', ['ui.router', 'firebase', "ui.bootstrap"]);
 
 blocChat.factory('Room', ['$firebaseArray', function($firebaseArray){
 	var firebaseRef = new Firebase('https://shining-torch-9429.firebaseio.com/');
 	var rooms = $firebaseArray(firebaseRef.child('rooms'));
+	var messages = $firebaseArray(firebaseRef.child('messages'));
 
 	// rooms.$add({name: 'Room 1'});
 
@@ -13,20 +21,38 @@ blocChat.factory('Room', ['$firebaseArray', function($firebaseArray){
 	};
 }]);
 
+// blocChat.controller('chatLog', ['$scope', "Room", function($scope, Room){
+// 	$scope.chat= userChat;
+// }]);
+
 blocChat.controller('RoomsDisplay', ['$scope', 'Room', function($scope, Room){
+
 	$scope.rooms = Room.all;
-}]);
 
-blocChat.controller('RoomsForm', ['$scope', 'Room', function($scope, Room) {
-	$scope.form = {};
+	$scope.chat= userChat;
 
-	var rooms = Room.all;
+	// $scope.roomMessage = this.room;
 
-	$scope.click = function(){
-		rooms.$add($scope.form);
-		console.log(Room.all);
+
+
+	$scope.roomClick= function(){
+		$scope.roomMessage = this.room.chatlog;
+
+		userChat.room= this.room.name;
 	};
+
 }]);
+
+// blocChat.controller('RoomsForm', ['$scope', 'Room', function($scope, Room) {
+// 	$scope.form = {};
+
+// 	var rooms = Room.all;
+
+// 	$scope.click = function(){
+// 		rooms.$add($scope.form);
+// 		console.log(Room.all);
+// 	};
+// }]);
 
 blocChat.controller('modalWindow', ['$scope', '$modal', 'Room', '$log', function($scope, $modal, Room, $log) {
 

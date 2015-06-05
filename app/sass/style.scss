@@ -6,6 +6,7 @@ body {
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
+
 }
 
 .navbar {
@@ -13,6 +14,9 @@ body {
 	width: 400px;
 	background-color: LightGray;
 	height: 100%;
+	z-index: 100;
+	top: -20px;
+	position: fixed;
 }
 
 .navbar h1, ul {
@@ -49,4 +53,28 @@ body {
 
  #inputs {
  	margin-top: 20px;
+ }
+
+ .chatroom {
+ 	position: relative;
+ 	left: 20px;
+ }
+
+ .chatroom h1 {
+ 	font-size: 2em;
+ }
+
+ .chatlog {
+ 	position: relative;
+ 	background-color: #E0EEEE;
+ 	padding: 1px;
+ }
+.textbox{
+	position: relative;
+}
+
+.time {
+	position: absolute;
+ 	right: 30px;
+ 	top: 0;
  }
