@@ -1,5 +1,6 @@
 "use strict";
 
+
 var userChat = {
 	room: "",
 	username : "Joe Lipper",
@@ -9,15 +10,28 @@ var userChat = {
 
 var blocChat = angular.module('BlocChat', ['ui.router', 'firebase', "ui.bootstrap"]);
 
-blocChat.factory('Room', ['$firebaseArray', function($firebaseArray){
+// blocChat.run(function () {});
+
+blocChat.factory('Room', ['$firebaseArray', function($firebaseArray, $scope){
 	var firebaseRef = new Firebase('https://shining-torch-9429.firebaseio.com/');
 	var rooms = $firebaseArray(firebaseRef.child('rooms'));
 	var messages = $firebaseArray(firebaseRef.child('messages'));
 
+	// console.log(messages);
+
+
 	// rooms.$add({name: 'Room 1'});
 
 	return {
-		all: rooms
+		all: rooms,
+		chats: messages,
+		messagesFunction: function(roomId) {
+			return firebaseRef.child('messages').orderByChild('roomId').equalTo(roomId);
+			// .on("value", function(snapshot){
+			// 	return snapshot.val();
+			// 	// console.log(snapshot.val());
+			// });
+		}
 	};
 }]);
 
@@ -31,12 +45,35 @@ blocChat.controller('RoomsDisplay', ['$scope', 'Room', function($scope, Room){
 
 	$scope.chat= userChat;
 
+	$scope.chats = Room.chats;
+
+
+
 	// $scope.roomMessage = this.room;
 
-
+	// console.log(Room.chats);
 
 	$scope.roomClick= function(){
-		$scope.roomMessage = this.room.chatlog;
+
+		var chatMessage = Room.messagesFunction(this.room.$id);
+
+		chatMessage.on("value", function(snapshot){
+			$scope.roomMessage = snapshot.val();
+		});
+
+		// POSSIBLE SOLUTION FOR WAITING FOR DATA …
+		// var waitForChatMessages = setInterval(function () {
+		// 	if (chatMessage) {
+		// 		console.log(chatMessage);
+		// 		clearInterval(waitForChatMessages);
+		// 	}
+		// }, 50);
+
+		// $scope.chats.orderByChild('roomId').equalTo(this.room.$id);
+
+		// $scope.roomMessage = this.room.chatlog;
+
+		// console.log(this.room.chatlog);
 
 		userChat.room= this.room.name;
 	};

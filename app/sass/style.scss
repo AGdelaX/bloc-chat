@@ -70,11 +70,15 @@ body {
  	padding: 1px;
  }
 .textbox{
+	padding: 20px;
 	position: relative;
+
+	&:nth-child(odd) { background-color: white; }
 }
+.username { margin-top: 0; }
 
 .time {
 	position: absolute;
  	right: 30px;
- 	top: 0;
+ 	top: 20px;
  }
