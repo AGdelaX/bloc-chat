@@ -9,9 +9,60 @@ var userChat = {
 	message: "Hey, how's it going?"
 };
 
-var blocChat = angular.module('BlocChat', ['ui.router', 'firebase', "ui.bootstrap"]);
+var blocChat = angular.module('BlocChat', ['ui.router', 'firebase', "ui.bootstrap", 'ngCookies']);
 
-// blocChat.run(function () {});
+blocChat.run(['$cookies', '$modal', '$rootScope', function ($cookies, $modal, $rootScope) {
+
+
+
+	if (!$cookies.blocChatCurrentUser || $cookies.blocChatCurrentUser === '') {
+
+		$modal.open({
+
+		templateUrl: '../templates/username-modal.html',
+		controller: 'usernameModalCtrl'
+
+		});
+
+	} else {
+
+		$rootScope.username = $cookies.blocChatCurrentUser;
+
+	};
+}]);
+
+blocChat.controller('usernameModalCtrl', ["$scope", "$modalInstance", "Room", '$cookies', function($scope, $modalInstance, Room, $cookies) {
+
+
+	var messages = Room.chats
+
+	$scope.usernameForm = {
+		name: " "
+	};
+
+
+	$scope.enter = function(){
+		$cookies.blocChatCurrentUser = $scope.usernameForm.name;
+		// messages.$add({username: $scope.usernameForm.name});
+		$modalInstance.close($scope.usernameForm.name);
+	};
+
+
+	// 	var rooms =  Room.all;
+
+	// 	$scope.form = {
+	// 	text: " "
+	// 	};
+
+	// $scope.input = function() {
+	// 	rooms.$add({name: $scope.form.text});
+	// 	$modalInstance.close($scope.form.text);
+	// };
+
+	// $scope.cancel= function(){
+	// 	$modalInstance.dismiss('cancel');
+	// };
+}]);
 
 blocChat.factory('Room', ['$firebaseArray', function($firebaseArray, $scope){
 	var firebaseRef = new Firebase('https://shining-torch-9429.firebaseio.com/');
@@ -47,6 +98,7 @@ blocChat.controller('RoomsDisplay', ['$scope', 'Room', function($scope, Room){
 	$scope.chat= userChat;
 
 	$scope.chats = Room.chats;
+
 
 
 
