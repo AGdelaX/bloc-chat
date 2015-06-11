@@ -133,11 +133,13 @@ blocChat.controller('RoomsDisplay', ['$scope', 'Room', '$cookies', function($sco
 
 	$scope.messageForm = null;
 
-	var currentDate = new Date();
-	var datetime = currentDate.getHours() + ":" + currentDate.getMinutes();
-
 
 	$scope.send = function(){
+
+		if ($scope.messageForm !== null) {
+
+		var currentDate = new Date();
+		var datetime = currentDate.getHours() + ":" + currentDate.getMinutes();
 
 		chats.$add({
 			message: $scope.messageForm, 
@@ -147,6 +149,8 @@ blocChat.controller('RoomsDisplay', ['$scope', 'Room', '$cookies', function($sco
 		});
 
 		$scope.messageForm = null;
+
+	}
 
 	};
 

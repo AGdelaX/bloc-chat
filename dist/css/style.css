@@ -4,16 +4,18 @@ html {
 body {
   height: 100%;
   margin: 0px;
-  padding: 0px; }
+  overflow: hidden;
+  padding: 0 0 44px 400px; }
 
 .navbar {
-  float: left;
+  position: fixed;
   width: 400px;
   background-color: LightGray;
   height: 100%;
   z-index: 100;
-  top: -20px;
-  position: fixed; }
+  top: 0;
+  left: 0;
+  margin: 0; }
 
 .navbar h1, ul {
   font-family: sans-serif; }
@@ -29,12 +31,20 @@ body {
   margin-top: -10px; }
 
 .messagebar {
-  position: absolute;
+  width: calc(100% - 400px);
+  padding: 0 0 0 20px;
+  position: fixed;
   bottom: 0;
-  right: 0; }
+  right: 0;
+  background-color: white;
+  white-space: nowrap; }
 
 #text-messages {
-  display: inline-block; }
+  padding: 0 0 0 10px;
+  height: 44px;
+  width: calc(100% - 90px);
+  display: inline-block;
+  margin: 0 10px 0 0; }
 
 #send-button {
   display: inline-block;
@@ -42,6 +52,7 @@ body {
   color: white; }
 
 .navmenu {
+  position: fixed;
   margin: 30px; }
 
 .modal-content {
@@ -61,11 +72,15 @@ body {
   margin-top: 20px; }
 
 .chatroom {
-  position: relative;
-  left: 20px; }
+  height: 100%;
+  webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative; }
 
 .chatroom h1 {
-  font-size: 2em; }
+  font-size: 2em;
+  padding: 0 20px; }
 
 .chatlog {
   position: relative;
