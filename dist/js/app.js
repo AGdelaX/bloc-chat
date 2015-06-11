@@ -14,7 +14,6 @@ var blocChat = angular.module('BlocChat', ['ui.router', 'firebase', "ui.bootstra
 blocChat.run(['$cookies', '$modal', '$rootScope', function ($cookies, $modal, $rootScope) {
 
 
-
 	if (!$cookies.blocChatCurrentUser || $cookies.blocChatCurrentUser === '') {
 
 		$modal.open({
@@ -91,15 +90,13 @@ blocChat.factory('Room', ['$firebaseArray', function($firebaseArray, $scope){
 // 	$scope.chat= userChat;
 // }]);
 
-blocChat.controller('RoomsDisplay', ['$scope', 'Room', function($scope, Room){
+blocChat.controller('RoomsDisplay', ['$scope', 'Room', '$cookies', function($scope, Room, $cookies){
 
 	$scope.rooms = Room.all;
 
 	$scope.chat= userChat;
 
-	$scope.chats = Room.chats;
-
-
+	var chats = Room.chats;
 
 
 	// $scope.roomMessage = this.room;
@@ -107,6 +104,7 @@ blocChat.controller('RoomsDisplay', ['$scope', 'Room', function($scope, Room){
 	// console.log(Room.chats);
 
 	$scope.roomClick= function(){
+
 
 		var chatMessage = Room.messagesFunction(this.room.$id);
 
@@ -129,9 +127,34 @@ blocChat.controller('RoomsDisplay', ['$scope', 'Room', function($scope, Room){
 		// console.log(this.room.chatlog);
 
 		userChat.room= this.room.name;
+
+		$scope.roomIdString = this.room.$id;
 	};
 
+	$scope.messageForm = null;
+
+	var currentDate = new Date();
+	var datetime = currentDate.getHours() + ":" + currentDate.getMinutes();
+
+
+	$scope.send = function(){
+
+		chats.$add({
+			message: $scope.messageForm, 
+			username: $cookies.blocChatCurrentUser,
+			time: datetime,
+			roomId: $scope.roomIdString
+		});
+
+		$scope.messageForm = null;
+
+	};
+
+
 }]);
+
+
+
 
 // blocChat.controller('RoomsForm', ['$scope', 'Room', function($scope, Room) {
 // 	$scope.form = {};

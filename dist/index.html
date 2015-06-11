@@ -26,9 +26,10 @@
 					<h1>Bloc Chat</h1>
 					<button class="btn" ng-click="open()">New Room</button>
 				</div>
-				<h2> {{ username }} </h2>
+				<p id="welcome-line"> Welcome, {{ username }}! <br/> <a href="#">Not {{ username }}? </a> </p>
 				<div>
 					<ul class= "available-rooms">
+						<p>Available Rooms:</p>
 						<li ng-repeat="room in rooms"><a href="#" ng-click="roomClick()">{{ room.name }}</a></li>
 					</ul>
 				</div>
@@ -45,6 +46,11 @@
 				<p class="time">{{ chats.time }}</p>
 			</div>
 		</div>
+	</div>
+
+	<div class="messagebar">
+		<input type="text" id="text-messages" placeholder="Type your message here." size="50" ng-model="messageForm">
+		<button id="send-button" ng-click="send()">Send</button>
 	</div>
 
 </body>

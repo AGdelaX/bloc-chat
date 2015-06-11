@@ -30,6 +30,26 @@ body {
 	line-height: 2em;
 }
 
+#welcome-line{
+	font-size: 1.4em;
+	margin-top: -10px;
+}
+
+.messagebar {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+#text-messages {
+	display: inline-block;
+}
+
+#send-button {
+	display: inline-block;
+	background-color: black;
+	color: white;
+}
 
 .navmenu {
 	margin: 30px;
