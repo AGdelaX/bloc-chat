@@ -90,7 +90,7 @@ blocChat.factory('Room', ['$firebaseArray', function($firebaseArray, $scope){
 // 	$scope.chat= userChat;
 // }]);
 
-blocChat.controller('RoomsDisplay', ['$scope', 'Room', '$cookies', function($scope, Room, $cookies){
+blocChat.controller('RoomsDisplay', ['$scope', 'Room', '$cookies', "$modal", function($scope, Room, $cookies, $modal){
 
 	$scope.rooms = Room.all;
 
@@ -130,6 +130,16 @@ blocChat.controller('RoomsDisplay', ['$scope', 'Room', '$cookies', function($sco
 
 		$scope.roomIdString = this.room.$id;
 	};
+
+	$scope.newUser = function() {
+		$modal.open({
+
+			templateUrl: '../templates/username-modal.html',
+			controller: 'newUsernameModalCtrl'
+
+		});
+	};
+
 
 	$scope.messageForm = null;
 
@@ -206,6 +216,38 @@ blocChat.controller('modalInstanceCtrl', ["$scope", "$modalInstance", "Room", fu
 	};
 
 	$scope.cancel= function(){
+		$modalInstance.dismiss('cancel');
+	};
+}]);
+
+// blocChat.controller('newUsernameModal', ["$scope", "$modal", "Room", function($scope, $modal, Room){
+	
+// 	$scope.newUser = function() {
+// 		$modal.open({
+
+// 			templateUrl: '../templates/username-modal.html',
+// 			controller: 'newUsernameModalCtrl'
+
+// 		});
+// 	};
+// }]);
+
+blocChat.controller('newUsernameModalCtrl', ["$scope", "$modalInstance", "Room", '$cookies', function($scope, $modalInstance, Room, $cookies) {
+
+	var messages = Room.chats
+
+	$scope.usernameForm = {
+		name: " "
+	};
+
+
+	$scope.enter = function(){
+		$cookies.blocChatCurrentUser = $scope.usernameForm.name;
+		// messages.$add({username: $scope.usernameForm.name});
+		$modalInstance.close($scope.usernameForm.name);
+	};
+
+	$scope.dismiss = function(){
 		$modalInstance.dismiss('cancel');
 	};
 }]);
