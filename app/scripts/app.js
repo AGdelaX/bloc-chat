@@ -89,7 +89,7 @@ blocChat.factory('Room', ['$firebaseArray', function($firebaseArray, $scope){
 // 	$scope.chat= userChat;
 // }]);
 
-blocChat.controller('RoomsDisplay', ['$scope', 'Room', '$cookies', "$modal", function($scope, Room, $cookies, $modal){
+blocChat.controller('RoomsDisplay', ['$scope', 'Room', '$cookies', "$modal", "$timeout", function($scope, Room, $cookies, $modal, $timeout){
 
 	$scope.rooms = Room.all;
 
@@ -162,6 +162,13 @@ blocChat.controller('RoomsDisplay', ['$scope', 'Room', '$cookies', "$modal", fun
 	}
 
 	};
+
+	$scope.refreshPage = function () {
+		$timeout(function() 
+			{refreshPage()}, 1000);
+	};
+
+	$scope.refreshPage();
 
 
 }]);
