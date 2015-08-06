@@ -7,21 +7,48 @@ body {
 	margin: 0px;
 	overflow: hidden;
 	padding: 0 0 44px 400px;
+	font-family: "Comic Sans MS";
+}
+
+p {
+	font-size: 1.2em;
+}
+
+li {
+	font-size: 1.2em;
 }
 
 .navbar {
 	position: fixed;
 	width: 400px;
-	background-color: LightGray;
+    background: -moz-linear-gradient( top ,
+        rgba(255, 0, 0, 1) 0%,
+        rgba(255, 255, 0, 1) 15%,
+        rgba(0, 255, 0, 1) 30%,
+        rgba(0, 255, 255, 1) 50%,
+        rgba(0, 0, 255, 1) 65%,
+        rgba(255, 0, 255, 1) 80%,
+        rgba(255, 0, 0, 1) 100%);
+    background: -webkit-gradient(linear,  left top,  left bottom, 
+        color-stop(0%, rgba(255, 0, 0, 1)), 
+        color-stop(15%, rgba(255, 255, 0, 1)),
+        color-stop(30%, rgba(0, 255, 0, 1)),
+        color-stop(50%, rgba(0, 255, 255, 1)),
+        color-stop(65%, rgba(0, 0, 255, 1)),
+        color-stop(80%, rgba(255, 0, 255, 1)),
+        color-stop(100%, rgba(255, 0, 0, 1)));
+    background-image: linear-gradient(rgba(255, 0, 0, 1) 0%,
+        rgba(255, 255, 0, 1) 15%,
+        rgba(0, 255, 0, 1) 30%,
+        rgba(0, 255, 255, 1) 50%,
+        rgba(0, 0, 255, 1) 65%,
+        rgba(255, 0, 255, 1) 80%,
+        rgba(255, 0, 0, 1) 100%);
 	height: 100%;
 	z-index: 100;
 	top: 0;
 	left: 0;
 	margin: 0;
-}
-
-.navbar h1, ul {
-	font-family: sans-serif; 
 }
 
 .navbar ul {
@@ -66,7 +93,13 @@ body {
 }
 
 .modal-content {
- 	background-color: LightGray;
+ 	background-image: linear-gradient(rgba(255, 0, 0, 1) 0%,
+        rgba(255, 255, 0, 1) 15%,
+        rgba(0, 255, 0, 1) 30%,
+        rgba(0, 255, 255, 1) 50%,
+        rgba(0, 0, 255, 1) 65%,
+        rgba(255, 0, 255, 1) 80%,
+        rgba(255, 0, 0, 1) 100%);
  	text-align: left;
  	padding: 30px;
  }
@@ -77,8 +110,10 @@ body {
  }
 
  .btn {
+ 	background-color: black;
  	margin-left : 30px;
  	margin-top: -15px;
+ 	color: white;
  }
 
  #inputs {
@@ -101,14 +136,16 @@ body {
 
  .chatlog {
  	position: relative;
- 	background-color: #E0EEEE;
+ 	background-color: PapayaWhip;
  	padding: 1px;
  }
 .textbox{
 	padding: 20px;
 	position: relative;
 
-	&:nth-child(odd) { background-color: white; }
+	&:nth-child(odd) { 
+		background-color: white; 
+	}
 }
 .username { margin-top: 0; }
 
